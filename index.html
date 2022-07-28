@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="css/normalize.css" />
+		<link rel="stylesheet" href="css/style.css" />
+
+		<script></script>
+		<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+	</head>
+
+	<body>
+		<div class="game-property-block">
+			<form action="#" id="form" autocomplete="off" class="form-start">
+				<div class="form__input-box">
+					<input
+						type="text"
+						class="form__input form-control"
+						placeholder="Количество карточек"
+						autocomplete="off"
+						name="cardCount"
+						id="cardCount"
+					/>
+				</div>
+				<button class="btn-start" id="submit-btn">Submit</button>
+			</form>
+		</div>
+		<div class="game-field" id="field"></div>
+	</body>
+	<script>
+		const validate = new window.JustValidate('#form');
+	</script>
+	<script src="js/cards.js"></script>
+</html>

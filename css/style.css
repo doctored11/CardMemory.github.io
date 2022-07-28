@@ -1,0 +1,32 @@
+* {
+	box-sizing: border-box;
+}
+.game-field {
+	padding: 100px 50px 0;
+	display: flex;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+.card {
+	display: inline-block;
+	padding: 20px 15px;
+	width: 350px;
+	height: 360px;
+	background-color: rgb(225, 255, 0);
+	margin-bottom: 20px;
+}
+.card * {
+	display: none;
+}
+.card--open * {
+	display: inline-block;
+}
+.card--open {
+	background-color: rgb(82, 220, 13);
+}
+.card--success {
+	background-color: rgb(82, 13, 220);
+}
