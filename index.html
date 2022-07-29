@@ -13,22 +13,24 @@
 	</head>
 
 	<body>
-		<div class="game-property-block">
-			<form action="#" id="form" autocomplete="off" class="form-start">
-				<div class="form__input-box">
-					<input
-						type="text"
-						class="form__input form-control"
-						placeholder="Количество карточек"
-						autocomplete="off"
-						name="cardCount"
-						id="cardCount"
-					/>
-				</div>
-				<button class="btn-start" id="submit-btn">Submit</button>
-			</form>
+		<div class="container">
+			<div class="game-property-block">
+				<form action="#" id="form" autocomplete="off" class="form-start">
+					<div class="form__input-box">
+						<input
+							type="text"
+							class="form__input form-control"
+							placeholder="Количество карточек"
+							autocomplete="off"
+							name="cardCount"
+							id="cardCount"
+						/>
+					</div>
+					<button class="btn-start" id="submit-btn">Submit</button>
+				</form>
+			</div>
+			<div class="game-field" id="field"></div>
 		</div>
-		<div class="game-field" id="field"></div>
 	</body>
 	<script>
 		const validate = new window.JustValidate('#form');

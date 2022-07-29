@@ -23,6 +23,7 @@ let arrayOfSelectCards = [];
 		painGameCard(arrayOfCards);
 
 		selectCard();
+		calcCardSize();
 	}
 
 	function addCard(content) {
@@ -52,7 +53,6 @@ let arrayOfSelectCards = [];
 					arrayOfSelectCards.push(arrayOfCards[i].value);
 				}
 				if (clickCount <= 0) {
-					console.log('finish');
 					console.log(arrayOfSelectCards);
 
 					if (checkCombination(arrayOfSelectCards)) {
@@ -71,6 +71,7 @@ let arrayOfSelectCards = [];
 					setTimeout(() => {
 						flipOff();
 					}, 400);
+					CheckFinish();
 				}
 			});
 		}
@@ -141,12 +142,38 @@ let arrayOfSelectCards = [];
 		console.log('&&&&');
 
 		let formStart = document.querySelector('.form-start');
+		let input = document.querySelector('.form__input');
+
+		console.log(formStart);
 		formStart.addEventListener('submit', () => {
+			input = document.querySelector('.form__input');
+			console.log(input);
+			console.log(input.classList.contains('just-validate-success-field'));
+			let form = document.getElementById('cardCount');
+			Number(form.value);
+			console.log(form.value > 5);
+
+			if (
+				Number.isInteger(Number(form.value)) &&
+				form.value > 5 &&
+				form.value < 51 &&
+				form.value % 2 == 0
+			) {
+				console.log('add');
+				input.classList.add('just-validate-success-field');
+			}
+			if (!input.classList.contains('just-validate-success-field')) {
+				console.log('ошибка валидации');
+				clearAll();
+				return;
+			}
+			setTimeout(() => {
+				document.querySelector('.game-property-block').classList.add('block-desable');
+			}, 400);
 			if (arrayOfCards.length != 0) {
 				clearAll();
 			}
 
-			let form = document.getElementById('cardCount');
 			let cardNum = form.value;
 			console.log(cardNum);
 			settings.cardsNumber = cardNum;
@@ -160,6 +187,52 @@ let arrayOfSelectCards = [];
 		cards.length = 0;
 
 		console.log(field);
+	}
+	function CheckFinish() {
+		for (let i = 0; i < arrayOfCards.length; ++i) {
+			console.log('вызов');
+			if (!arrayOfCards[i]._success) return;
+		}
+		console.log('finish');
+		document.querySelector('.game-property-block').classList.remove('block-desable');
+	}
+	function calcCardSize() {
+		let field = document.querySelector('.game-field');
+		let _width, _height;
+		let cardsNumber = cards.length;
+		let fieldWidth = 0.65 * screen.width;
+		let fieldHeight = 0.65 * screen.height;
+
+		//
+		let fieldSq = fieldHeight * fieldWidth;
+		let bufer = fieldSq / cardsNumber;
+		if (fieldHeight <= fieldWidth) {
+			let a = fieldHeight;
+			fieldHeight = fieldWidth;
+			fieldWidth = a;
+		}
+		bufer = bufer / (fieldHeight / fieldWidth);
+		let x = Math.round(Math.sqrt(bufer));
+
+		console.log(x);
+		bufer = Math.ceil(fieldWidth / x);
+		x = Math.floor(fieldWidth / bufer);
+		let margin = x * 0.15;
+
+		_width = x - margin;
+		_height = x * (fieldHeight / fieldWidth) - margin;
+		//
+
+		let card = document.querySelectorAll('.card');
+
+		for (let i = 0; i < card.length; ++i) {
+			console.log(card[i]);
+			card[i].style.width = `${_width}px`;
+			card[i].style.height = `${_height}px`;
+			card[i].style.marginRight = `${margin}px`;
+			card[i].style.marginBottom = `${margin}px`;
+		}
+		field.style.paddingLeft = `${margin}px`;
 	}
 }
 
@@ -187,6 +260,14 @@ let arrayOfSelectCards = [];
 			rule: 'minNumber',
 			value: 6,
 			errorMessage: 'Ну это совсем не серьездно',
+		},
+		{
+			validator: (value) => {
+				let form = document.getElementById('cardCount');
+				const chet = form.value;
+				return Boolean(Number(chet) % settings.clickCharge == 0);
+			},
+			errorMessage: 'Лучше чтоб число делилось на ' + settings.clickCharge,
 		},
 	]);
 }
