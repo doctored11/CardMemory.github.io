@@ -7,9 +7,14 @@ const settings = {
 	clickCharge: 2,
 };
 let arrayOfSelectCards = [];
+let _hour = 00,
+	_min = 00,
+	_sec = 00,
+	_ms = 00,
+	_interval;
 
 {
-	// createCardsArray();
+	// main logic
 	getSettings();
 
 	function createCardsArray() {
@@ -176,6 +181,9 @@ let arrayOfSelectCards = [];
 
 			let cardNum = form.value;
 			console.log(cardNum);
+			// запуск таймера
+			timerCounter();
+			//
 			settings.cardsNumber = cardNum;
 			createCardsArray();
 		});
@@ -234,10 +242,84 @@ let arrayOfSelectCards = [];
 		}
 		field.style.paddingLeft = `${margin}px`;
 	}
+
+	// таймер
+	function timerPause() {
+		clearInterval(_interval);
+		console.log(_sec);
+		//эту функцию вызывать после нахождения всех пар
+		// тут мне нужно получить значение времени - сравнить его - и если это МЕНЬШЕЕ время то записать его в локал стораже)
+	}
+
+	function timerStop() {
+		clearInterval(_interval);
+		_hour = 00;
+		_min = 00;
+		_sec = 00;
+		_ms = 00;
+		hourEl.textContent = '00';
+		minEl.textContent = '00';
+		secEl.textContent = '00';
+		msecEl.textContent = '00';
+	}
+
+	// timer
+	function timerCounter() {
+		clearInterval(_interval);
+		_interval = setInterval(startTimer, 1);
+	}
+	const hourEl = document.querySelector('.hours');
+	const minEl = document.querySelector('.minutes');
+	const secEl = document.querySelector('.seconds');
+	const msecEl = document.querySelector('.mili-seconds');
+
+	// let _hour = 00,
+	// 	_min = 00,
+	// 	_sec = 00,
+	// 	_ms = 00,
+	// 	_interval;
+
+	function startTimer() {
+		_ms++;
+
+		_ms < 10 ? (msecEl.textContent = '0' + _ms) : _ms < 100 ? (msecEl.textContent = _ms) : 0;
+		if (_ms > 99) {
+			++_sec;
+			secEl.textContent = '0' + _sec;
+			_ms = 0;
+			msecEl.textContent = '0' + _ms;
+		}
+		//sec
+		_sec < 10 ? (secEl.textContent = '0' + _sec) : _sec < 60 ? (secEl.textContent = _sec) : 0;
+		if (_sec > 59) {
+			++_min;
+			minEl.textContent = '0' + _min;
+			_sec = 0;
+			secEl.textContent = '0' + _sec;
+		}
+		//min
+		_min < 10 ? (minEl.textContent = '0' + _min) : _min < 60 ? (minEl.textContent = _min) : 0;
+		if (_min > 59) {
+			++_hour;
+			hourEl.textContent = '0' + _hour;
+			_min = 0;
+			minEl.textContent = '0' + _min;
+		}
+		//
+		_hour < 10
+			? (hourEl.textContent = '0' + _hour)
+			: _hour < 60
+			? (hourEl.textContent = _hour)
+			: 0;
+		if (_hour > 59) {
+			_min, _hour, (_sec = 0);
+		}
+	}
 }
 
 //
 {
+	// validate
 	const validation = new JustValidate('#form');
 
 	validation.addField('#cardCount', [
@@ -270,4 +352,6 @@ let arrayOfSelectCards = [];
 			errorMessage: 'Лучше чтоб число делилось на ' + settings.clickCharge,
 		},
 	]);
+}
+{
 }

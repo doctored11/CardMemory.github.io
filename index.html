@@ -13,6 +13,32 @@
 	</head>
 
 	<body>
+		<header class="header">
+			<div class="container header__container">
+				<ul class="header__item-list">
+					<li class="header__block user-name">Lodochnik.test</li>
+					<li class="header__block live-time timer">
+						<div class="timer__timer-block">
+							<div class="time timer__time hours">00</div>
+							<div class="timer__time-title">h</div>
+						</div>
+						<div class="timer__timer-block">
+							<div class="time timer__time minutes">00</div>
+							<div class="timer__time-title">m</div>
+						</div>
+						<div class="timer__timer-block">
+							<div class="time timer__time seconds">00</div>
+							<div class="timer__time-title">s</div>
+						</div>
+						<div class="timer__timer-block">
+							<div class="time timer__time mili-seconds">00</div>
+							<div class="timer__time-title">ms</div>
+						</div>
+					</li>
+				</ul>
+				<div class="header__block property-btn">Button</div>
+			</div>
+		</header>
 		<div class="container">
 			<div class="game-property-block">
 				<form action="#" id="form" autocomplete="off" class="form-start">
@@ -29,6 +55,7 @@
 					<button class="btn-start" id="submit-btn">Submit</button>
 				</form>
 			</div>
+
 			<div class="game-field" id="field"></div>
 		</div>
 	</body>
