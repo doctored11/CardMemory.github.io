@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<link rel="stylesheet" href="css/normalize.css" />
+		<link rel="stylesheet" href="css/choices.min.css" />
 		<link rel="stylesheet" href="css/style.css" />
 
 		<script></script>
@@ -41,7 +42,16 @@
 		</header>
 		<div class="container">
 			<div class="game-property-block">
+				<div class="property-content"></div>
 				<form action="#" id="form" autocomplete="off" class="form-start">
+					<div class="main__select">
+						<select name="select" id="select" class="select">
+							<option value="">Режим</option>
+							<option value="2">Пары</option>
+							<option value="3">Тройки</option>
+							<option value="4">Четверки</option>
+						</select>
+					</div>
 					<div class="form__input-box">
 						<input
 							type="text"
@@ -62,5 +72,6 @@
 	<script>
 		const validate = new window.JustValidate('#form');
 	</script>
+	<script src="js/choices.min.js"></script>
 	<script src="js/cards.js"></script>
 </html>

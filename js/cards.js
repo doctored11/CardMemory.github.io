@@ -1,11 +1,20 @@
 let card;
+let select = document.getElementById('select');
 let cards = [];
+let bestR = {
+	// hour: 121,
+	// min: 121,
+	// sec: 121,
+	// ms: 121,
+};
 
 let arrayOfCards = [];
 const settings = {
 	cardsNumber: 6,
 	clickCharge: 2,
 };
+let nMod;
+
 let arrayOfSelectCards = [];
 let _hour = 00,
 	_min = 00,
@@ -19,7 +28,8 @@ let _hour = 00,
 
 	function createCardsArray() {
 		console.log('221');
-
+		settings.clickCharge = pairModeDetermine();
+		if (settings.clickCharge == 0) settings.clickCharge = 2;
 		for (let i = 0; i < settings.cardsNumber; ++i) {
 			arrayOfCards.push({ value: null, _open: false, _success: false, id: i + 1 });
 		}
@@ -65,6 +75,7 @@ let _hour = 00,
 						for (let n = 0; n < trueCards.length; ++n) {
 							trueCards[n].classList.add('card--success');
 						}
+
 						for (let n = 0; n < arrayOfCards.length; ++n) {
 							if (arrayOfCards[n]._open == true) {
 								arrayOfCards[n]._success = true;
@@ -151,18 +162,20 @@ let _hour = 00,
 
 		console.log(formStart);
 		formStart.addEventListener('submit', () => {
+			pairModeDetermine();
+			timerStop();
 			input = document.querySelector('.form__input');
 			console.log(input);
 			console.log(input.classList.contains('just-validate-success-field'));
 			let form = document.getElementById('cardCount');
 			Number(form.value);
 			console.log(form.value > 5);
-
+			if (settings.clickCharge == 0) settings.clickCharge = 2;
 			if (
 				Number.isInteger(Number(form.value)) &&
 				form.value > 5 &&
 				form.value < 51 &&
-				form.value % 2 == 0
+				form.value % settings.clickCharge == 0
 			) {
 				console.log('add');
 				input.classList.add('just-validate-success-field');
@@ -181,10 +194,23 @@ let _hour = 00,
 
 			let cardNum = form.value;
 			console.log(cardNum);
-			// запуск таймера
-			timerCounter();
-			//
+
 			settings.cardsNumber = cardNum;
+			bestR = JSON.parse(
+				localStorage.getItem(`BestResult${settings.cardsNumber}-${settings.clickCharge}`)
+			);
+			if (bestR == undefined) {
+				bestR = {
+					hour: 121,
+					min: 121,
+					sec: 121,
+					ms: 121,
+					mod: 121,
+					click: 121,
+				};
+			}
+
+			timerCounter();
 			createCardsArray();
 		});
 	}
@@ -202,7 +228,12 @@ let _hour = 00,
 			if (!arrayOfCards[i]._success) return;
 		}
 		console.log('finish');
+		timerPause();
 		document.querySelector('.game-property-block').classList.remove('block-desable');
+		let restartText = document.querySelector('.property-content');
+
+		restartText.textContent = `Ваш посоедний результат ${_hour}h:${_min}m:${_sec}s:${_ms}ms\n
+	 	Ваш лучший результат в режиме ${nMod} карт по правилам \"комбинация ${settings.clickCharge}\" =  ${bestR.hour}h:${bestR.min}m:${bestR.sec}s:${bestR.ms}ms `;
 	}
 	function calcCardSize() {
 		let field = document.querySelector('.game-field');
@@ -247,8 +278,23 @@ let _hour = 00,
 	function timerPause() {
 		clearInterval(_interval);
 		console.log(_sec);
+
 		//эту функцию вызывать после нахождения всех пар
+
 		// тут мне нужно получить значение времени - сравнить его - и если это МЕНЬШЕЕ время то записать его в локал стораже)
+
+		console.log(_sec, bestR.sec, _sec < bestR.sec);
+		_hour < bestR.hour ? (bestR.hour = _hour) : 0;
+		_min < bestR.min ? (bestR.min = _min) : 0;
+		_sec < bestR.sec ? (bestR.sec = _sec) : 0;
+		_ms < bestR.ms ? (bestR.ms = _ms) : 0;
+		bestR.mod = settings.cardsNumber;
+		// bestR = JSON.stringify(bestR);
+		nMod = settings.cardsNumber;
+		localStorage.setItem(
+			`BestResult${settings.cardsNumber}-${settings.clickCharge}`,
+			JSON.stringify(bestR)
+		);
 	}
 
 	function timerStop() {
@@ -266,7 +312,7 @@ let _hour = 00,
 	// timer
 	function timerCounter() {
 		clearInterval(_interval);
-		_interval = setInterval(startTimer, 1);
+		_interval = setInterval(startTimer, 10);
 	}
 	const hourEl = document.querySelector('.hours');
 	const minEl = document.querySelector('.minutes');
@@ -315,12 +361,27 @@ let _hour = 00,
 			_min, _hour, (_sec = 0);
 		}
 	}
+	function pairModeDetermine() {
+		let combination = Number(select.value);
+		settings.clickCharge = combination;
+		return combination;
+	}
 }
 
 //
 {
 	// validate
 	const validation = new JustValidate('#form');
+	window.pairN = pairModeDetermine();
+	let formSelect = document.querySelector('.main__select');
+	formSelect.addEventListener('mouseup', () => {
+		console.log('EVENT EVENT');
+		pairModeDetermine();
+		window.pairN = pairModeDetermine();
+		console.log(pairN);
+	});
+	// let text;
+	// text = `Лучше чтоб число делилось на  ` + window.pairN;
 
 	validation.addField('#cardCount', [
 		{
@@ -347,11 +408,29 @@ let _hour = 00,
 			validator: (value) => {
 				let form = document.getElementById('cardCount');
 				const chet = form.value;
+				console.log(Number(chet), settings.clickCharge);
+				window.pairN = settings.clickCharge;
+				if (settings.clickCharge == 0) settings.clickCharge = 2;
+				// window.pairN = settings.clickCharg;
+
 				return Boolean(Number(chet) % settings.clickCharge == 0);
 			},
-			errorMessage: 'Лучше чтоб число делилось на ' + settings.clickCharge,
+
+			errorMessage: () => {
+				console.log(window.pairN);
+				if (window.pairN == 0) window.pairN = 2;
+				return `Лучше чтоб число делилось на  ` + window.pairN;
+			},
 		},
 	]);
 }
 {
+	const element = document.querySelector('.select');
+	const choices = new Choices(element, {
+		searchEnabled: false,
+		allowHTML: true,
+		searchChoices: true,
+		placeholder: true,
+		itemSelectText: '',
+	});
 }
