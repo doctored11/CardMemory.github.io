@@ -252,8 +252,20 @@ let _hour = 00,
 		let cardsNumber = cards.length;
 		let fieldWidth = 0.65 * screen.width;
 		let fieldHeight = 0.65 * screen.height;
+		let card = document.querySelectorAll('.card');
 
 		//
+		if (card.length < 18) {
+			fieldWidth = 0.65 * screen.width;
+			fieldHeight = 0.65 * screen.height;
+		} else if (card.length < 36) {
+			fieldWidth = 0.75 * screen.width;
+			fieldHeight = 0.75 * screen.height;
+		} else {
+			fieldWidth = 0.85 * screen.width;
+			fieldHeight = 0.85 * screen.height;
+		}
+
 		let fieldSq = fieldHeight * fieldWidth;
 		let bufer = fieldSq / cardsNumber;
 		if (fieldHeight <= fieldWidth) {
@@ -273,7 +285,18 @@ let _hour = 00,
 		_height = x * (fieldHeight / fieldWidth) - margin;
 		//
 		let body = document.querySelector('.body-block');
-		let card = document.querySelectorAll('.card');
+
+		if (card.length < 18) {
+			body.style.height = `${0.65 * screen.height}px`;
+		} else if (card.length < 36) {
+			body.style.height = `${0.8 * screen.height}px`;
+			margin = x * 0.08;
+		} else {
+			body.style.height = `${0.95 * screen.height}px`;
+			body.style.justifyContent = 'flex-start';
+			console.log('95%');
+			margin = x * 0.05;
+		}
 
 		for (let i = 0; i < card.length; ++i) {
 			console.log(card[i]);
@@ -282,7 +305,10 @@ let _hour = 00,
 			card[i].style.marginRight = `${margin}px`;
 			card[i].style.marginBottom = `${margin}px`;
 		}
-		// body.style.height = `${screen.height}px`;
+		console.log(screen.height);
+
+		body.style.minHeight = `${0.6 * screen.height}px`;
+		body.style.maxHeight = `${0.95 * screen.height}px`;
 
 		field.style.paddingLeft = `${margin}px`;
 	}
