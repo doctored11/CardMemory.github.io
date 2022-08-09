@@ -43,15 +43,24 @@ let _hour = 00,
 
 	function addCard(content) {
 		const card = document.createElement('div');
+		const front = document.createElement('div');
+		const back = document.createElement('div');
+
 		const cardContent = document.createElement('div');
+
 		console.log('paint');
 		console.log(content);
 
 		cardContent.innerHTML = content;
 		card.classList.add('card');
+		front.classList.add('front');
+		back.classList.add('back');
 
 		document.getElementById('field').append(card);
-		card.append(cardContent);
+		card.append(front);
+		card.append(back);
+
+		front.append(cardContent);
 	}
 
 	function addClick(arrayOfCards) {
@@ -232,11 +241,13 @@ let _hour = 00,
 		document.querySelector('.game-property-block').classList.remove('block-desable');
 		let restartText = document.querySelector('.property-content');
 
-		restartText.textContent = `Ваш посоедний результат ${_hour}h:${_min}m:${_sec}s:${_ms}ms\n
+		restartText.textContent = `Ваш последний результат ${_hour}h:${_min}m:${_sec}s:${_ms}ms\n
 	 	Ваш лучший результат в режиме ${nMod} карт по правилам \"комбинация ${settings.clickCharge}\" =  ${bestR.hour}h:${bestR.min}m:${bestR.sec}s:${bestR.ms}ms `;
 	}
 	function calcCardSize() {
 		let field = document.querySelector('.game-field');
+		let header = document.querySelector('.header');
+		console.log(header.getBoundingClientRect().height);
 		let _width, _height;
 		let cardsNumber = cards.length;
 		let fieldWidth = 0.65 * screen.width;
@@ -261,7 +272,7 @@ let _hour = 00,
 		_width = x - margin;
 		_height = x * (fieldHeight / fieldWidth) - margin;
 		//
-
+		let body = document.querySelector('.body-block');
 		let card = document.querySelectorAll('.card');
 
 		for (let i = 0; i < card.length; ++i) {
@@ -271,6 +282,8 @@ let _hour = 00,
 			card[i].style.marginRight = `${margin}px`;
 			card[i].style.marginBottom = `${margin}px`;
 		}
+		// body.style.height = `${screen.height}px`;
+
 		field.style.paddingLeft = `${margin}px`;
 	}
 

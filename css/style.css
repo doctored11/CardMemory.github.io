@@ -1,8 +1,34 @@
+:root {
+	--main-blue: #07c7b7fe;
+}
+/* технические стили */
 * {
 	box-sizing: border-box;
 	/* border: 2px solid rgba(240, 180, 29, 0.547); */
+	font-family: 'Nunito', sans-serif;
+}
+body {
+	overflow: hidden;
+	background: #c9d6ffea;
+
+	background: linear-gradient(to right, #e2e2e2dc, #c9d6ffe6);
+}
+.body-block {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+.container {
+	padding: 0 10%;
+	display: flex;
+}
+.header {
+	/* margin-bottom: 8%; */
 }
 .header__container {
+	padding-top: 15px;
+	padding-bottom: 15px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -17,15 +43,16 @@
 }
 .game-field {
 	/* padding: 100px 50px 0; */
-	padding-top: 15%;
+	padding-top: 1%;
 
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: center;
 	flex-wrap: wrap;
 	flex-direction: row;
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 }
 .user-name {
 	margin-right: 15px;
@@ -39,95 +66,6 @@
 	margin-right: 10px;
 }
 
-.card {
-	display: inline-block;
-	padding: 20px 15px;
-
-	/* min-width: 150px;
-	min-height: 160px; */
-	/* flex: 1; */
-
-	background-color: rgb(225, 255, 0);
-	/* margin-bottom: 20px;
-	margin-right: 15px; */
-}
-.card * {
-	display: none;
-}
-.card--open * {
-	display: inline-block;
-}
-.card--open {
-	background-color: rgb(82, 220, 13);
-}
-.card--success {
-	background-color: rgb(82, 13, 220);
-}
-.container {
-	padding: 0 10%;
-	display: flex;
-}
-/* select */
-.choices,
-.is-open .choices__inner,
-.choices__inner {
-	border-radius: 15px;
-	background-color: white;
-	color: #000;
-	width: 176px;
-	max-width: 176px;
-
-	z-index: 5;
-	max-width: 176px;
-	min-width: 175px;
-
-	font-family: 'Open Sans', sans-serif;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 19px;
-}
-.is-open .choices__list--dropdown,
-.is-open .choices__list[aria-expanded] {
-	visibility: visible;
-	background-color: white;
-	border-radius: 0 0 15px 15px;
-	transform: translateY(-10px);
-
-	z-index: -1;
-}
-.choices[data-type*='select-one'] .choices__inner {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 10px 0 10px 20px;
-}
-#choices--select-item-choice-1 {
-	padding-top: 30px;
-}
-.choices__list--dropdown .choices__placeholder {
-	display: none;
-}
-.choices[data-type*='select-one']::after {
-	content: '';
-	width: 10px;
-	height: 10px;
-	border: none;
-	border-bottom: 1px #000 solid;
-	border-right: 1px #000 solid;
-	transform: rotate(45deg);
-	transition: transform 0.3s ease;
-}
-.form-control {
-	padding-left: 15px;
-}
-.choices[data-type*='select-one'].is-open::after {
-	margin: none;
-	transform: rotate(225deg);
-	border-bottom: 1px #ccb26e solid;
-	border-right: 1px #ccb26e solid;
-	transition: transform 0.3s ease;
-}
 /* scroll */
 .main__scroll {
 	width: 400px;
@@ -152,12 +90,110 @@
 }
 
 /*  */
+
+/* стили  */
+/* карточки */
+.card {
+	display: inline-block;
+
+	/* background-color: #fff; */
+}
+/* .card  {
+	display: none;
+} */
+.card--open * {
+	display: inline-block;
+}
+.card--open {
+	/* background-color: rgb(82, 220, 13); */
+}
+.card--success {
+	/* background-color: rgb(82, 13, 220); */
+}
+.card {
+	/* border-radius: 15px; */
+	/* overflow: hidden; */
+	position: relative;
+}
+.front,
+.back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transition: transform 0.55s cubic-bezier(0, 1.65, 0.255, 1.035);
+
+	z-index: 1;
+	padding: 20px 15px;
+	border-radius: 15px;
+
+	box-shadow: 0 0 0px 10px white inset;
+}
+.font * {
+	display: none;
+}
+.back {
+	transform: perspective(600px) rotateY(0deg);
+	background-size: 30px 30px;
+	background-color: var(--main-blue);
+	background-image: -webkit-linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.2) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.2) 50%,
+		rgba(255, 255, 255, 0.2) 75%,
+		transparent 75%,
+		transparent
+	);
+	backface-visibility: hidden;
+}
+.front {
+	/* z-index: 2; */
+	transform: perspective(600px) rotateY(180deg);
+	background-color: rgb(82, 220, 13);
+}
+.card--open .back {
+	transform: perspective(600px) rotateY(-180deg);
+}
+.card--open .front * {
+	display: inline-block;
+}
+.card--open .front {
+	transform: perspective(600px) rotateY(0deg);
+}
+
+.card--success .front {
+	transform: perspective(600px) rotateY(0deg);
+	background-color: rgb(187, 232, 7);
+	transition: background-color 0.3s ease 0.1s;
+}
+.card--success .back {
+	transform: perspective(600px) rotateY(-180deg);
+}
+
+.back {
+	padding: 5px;
+}
+
+/* меню старта */
 .game-property-block {
-	display: block;
+	transform: translateY(0);
+	visibility: 100%;
+	transition: transform 0.8s cubic-bezier(0.05, 1.65, 0.195, 0.71);
+
+	z-index: 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
 	min-width: 60%;
 	max-width: 70%;
 	min-height: 35%;
 	max-height: 65%;
+
 	position: absolute;
 	margin: auto;
 	padding: 0;
@@ -165,8 +201,134 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: rgb(24, 255, 124);
+
+	background-size: 50px 50px;
+	background-color: var(--main-blue);
+	background-image: -webkit-linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.2) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.2) 50%,
+		rgba(255, 255, 255, 0.2) 75%,
+		transparent 75%
+	);
+	box-shadow: 0 0 0px 10px white inset;
+
+	border-radius: 50px;
+	border: none;
 }
 .block-desable {
+	transform: translateY(-300%);
+	transition: transform 0.5s cubic-bezier(1, 0.55, 0.58, 1.26) 0.1s, visibility 0.2s ease 1s;
+	visibility: 0%;
+	/* display: none; */
+	display: flex;
+}
+.property-content {
+	display: flex;
+
+	font-family: 'Nunito', sans-serif;
+
+	color: #fff;
+	font-weight: 800;
+	font-size: 24px;
+	font-style: italic;
+	line-height: 1.2em;
+	text-align: center;
+
+	margin-bottom: 15px;
+}
+.form-start {
+	display: flex;
+	flex-direction: column;
+}
+.form-start > :not(:last-child) {
+	margin-bottom: 15px;
+	height: 55px;
+}
+
+.form__input,
+.choices[data-type*='select-one'] .choices__inner,
+.btn-start {
+	border: none;
+	padding: 8px 15px;
+}
+
+.choices[data-type*='select-one'] .choices__inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+/* .choices[data-type*='select-one'] .choices__inner * {
+	width: 100%;
+	height: 100%;
+} */
+
+#choices--select-item-choice-1 {
+	padding-top: 30px;
+}
+.choices__list--dropdown .choices__placeholder {
 	display: none;
 }
+.choices[data-type*='select-one']::after {
+	content: '';
+	width: 10px;
+	height: 10px;
+	border: none;
+	border-bottom: 1px #000 solid;
+	border-right: 1px #000 solid;
+	transform: rotate(45deg);
+	transition: transform 0.3s ease;
+}
+.form-control {
+	height: 100%;
+}
+.choices[data-type*='select-one'].is-open::after {
+	margin: none;
+	transform: rotate(225deg);
+	border-bottom: 1px var(--main-blue) solid;
+	border-right: 1px var(--main-blue) solid;
+	transition: transform 0.3s ease;
+}
+/* select */
+.choices,
+.is-open .choices__inner,
+.choices__inner {
+	/* border-radius: 15px; */
+	background-color: white;
+	color: #000;
+	width: 100%;
+	/* max-width: 176px; */
+
+	z-index: 5;
+	/* max-width: 176px;
+	min-width: 175px; */
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 19px;
+}
+.is-open .choices__list--dropdown,
+.is-open .choices__list[aria-expanded] {
+	visibility: visible;
+	background-color: white;
+	/* border-radius: 0 0 15px 15px; */
+	transform: translateY(-10px);
+	border: none;
+
+	z-index: -1;
+}
+.choices__list--dropdown .choices__item,
+.choices__list[aria-expanded] .choices__item {
+	padding: 8px 15px;
+}
+.choices[data-type*='select-one'] {
+	height: 100%;
+	/* display: flex; */
+}
+/*  */
