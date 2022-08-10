@@ -45,6 +45,10 @@ let _hour = 00,
 		const card = document.createElement('div');
 		const front = document.createElement('div');
 		const back = document.createElement('div');
+		const img = document.createElement('img');
+
+		img.src = `sourse/front-${content}.png`;
+		img.classList.add('front-img');
 
 		const cardContent = document.createElement('div');
 
@@ -52,6 +56,7 @@ let _hour = 00,
 		console.log(content);
 
 		cardContent.innerHTML = content;
+		cardContent.classList.add('front-num');
 		card.classList.add('card');
 		front.classList.add('front');
 		back.classList.add('back');
@@ -61,6 +66,7 @@ let _hour = 00,
 		card.append(back);
 
 		front.append(cardContent);
+		front.append(img);
 	}
 
 	function addClick(arrayOfCards) {
@@ -253,6 +259,8 @@ let _hour = 00,
 		let fieldWidth = 0.65 * screen.width;
 		let fieldHeight = 0.65 * screen.height;
 		let card = document.querySelectorAll('.card');
+		let containerB = document.querySelector('.body__container');
+		containerB.style.height = `${screen.height}px`;
 
 		//
 		if (card.length < 18) {
@@ -285,9 +293,10 @@ let _hour = 00,
 		_height = x * (fieldHeight / fieldWidth) - margin;
 		//
 		let body = document.querySelector('.body-block');
-
-		if (card.length < 18) {
+		if (card.length < 14) {
 			body.style.height = `${0.65 * screen.height}px`;
+		} else if (card.length < 18) {
+			body.style.height = `${0.7 * screen.height}px`;
 		} else if (card.length < 36) {
 			body.style.height = `${0.8 * screen.height}px`;
 			margin = x * 0.08;
@@ -311,6 +320,21 @@ let _hour = 00,
 		body.style.maxHeight = `${0.95 * screen.height}px`;
 
 		field.style.paddingLeft = `${margin}px`;
+	}
+	// тряска по времени
+	function addShake() {
+		let card = document.querySelectorAll('.card');
+		setTimeout(() => {
+			let n = Math.floor(Math.random() * card.length);
+
+			card[n].classList.add('shake');
+
+			setTimeout(() => {
+				card[n].classList.remove('shake');
+			}, 300);
+			setTimeout(() => {}, 3000);
+		}, 9000);
+		return;
 	}
 
 	// таймер
@@ -375,12 +399,18 @@ let _hour = 00,
 			msecEl.textContent = '0' + _ms;
 		}
 		//sec
+
 		_sec < 10 ? (secEl.textContent = '0' + _sec) : _sec < 60 ? (secEl.textContent = _sec) : 0;
 		if (_sec > 59) {
 			++_min;
 			minEl.textContent = '0' + _min;
 			_sec = 0;
 			secEl.textContent = '0' + _sec;
+		}
+		if (_sec % 12 == 0 && _ms == 0) {
+			console.log('!!!!!!!');
+			addShake();
+			return;
 		}
 		//min
 		_min < 10 ? (minEl.textContent = '0' + _min) : _min < 60 ? (minEl.textContent = _min) : 0;

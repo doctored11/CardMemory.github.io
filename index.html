@@ -22,7 +22,7 @@
 	</head>
 
 	<body>
-		<div class="body-block">
+		<div class="body__container">
 			<header class="header">
 				<div class="container header__container">
 					<ul class="header__item-list">
@@ -49,33 +49,35 @@
 					<div class="header__block property-btn">Button</div>
 				</div>
 			</header>
-			<div class="container">
-				<div class="game-property-block">
-					<div class="property-content"></div>
-					<form action="#" id="form" autocomplete="off" class="form-start">
-						<div class="form__input-box">
-							<input
-								type="text"
-								class="form__input form-control"
-								placeholder="Количество карточек"
-								autocomplete="off"
-								name="cardCount"
-								id="cardCount"
-							/>
-						</div>
-						<div class="main__select">
-							<select name="select" id="select" class="select">
-								<option value="">Режим</option>
-								<option value="2">Пары</option>
-								<option value="3">Тройки</option>
-								<option value="4">Четверки</option>
-							</select>
-						</div>
-						<button class="btn-start" id="submit-btn">Submit</button>
-					</form>
-				</div>
+			<div class="body__frame">
+				<div class="container body-block">
+					<div class="game-property-block">
+						<div class="property-content"></div>
+						<form action="#" id="form" autocomplete="off" class="form-start">
+							<div class="form__input-box">
+								<input
+									type="text"
+									class="form__input form-control"
+									placeholder="Количество карточек"
+									autocomplete="off"
+									name="cardCount"
+									id="cardCount"
+								/>
+							</div>
+							<div class="main__select">
+								<select name="select" id="select" class="select">
+									<option value="">Режим</option>
+									<option value="2">Пары</option>
+									<option value="3">Тройки</option>
+									<option value="4">Четверки</option>
+								</select>
+							</div>
+							<button class="btn-start" id="submit-btn">Submit</button>
+						</form>
+					</div>
 
-				<div class="game-field" id="field"></div>
+					<div class="game-field" id="field"></div>
+				</div>
 			</div>
 		</div>
 	</body>

@@ -19,6 +19,14 @@ body {
 	justify-content: space-between;
 	height: 100%;
 }
+.body__frame {
+	height: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.body__container {
+}
 .container {
 	padding: 0 10%;
 	display: flex;
@@ -47,12 +55,16 @@ body {
 
 	display: flex;
 	align-items: center;
+
 	justify-content: center;
+
 	flex-wrap: wrap;
 	flex-direction: row;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	/* align-content: stretch; */
+	align-content: center;
 }
 .user-name {
 	margin-right: 15px;
@@ -98,6 +110,11 @@ body {
 
 	/* background-color: #fff; */
 }
+.card:hover {
+	cursor: pointer;
+	transform: scale(102%) translateY(-2%);
+	transition: scale 0.1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.1s, translateY 0.2s ease;
+}
 /* .card  {
 	display: none;
 } */
@@ -107,8 +124,9 @@ body {
 .card--open {
 	/* background-color: rgb(82, 220, 13); */
 }
-.card--success {
-	/* background-color: rgb(82, 13, 220); */
+.card--success:hover {
+	cursor: auto;
+	transform: scale(100%) translateY(-1%);
 }
 .card {
 	/* border-radius: 15px; */
@@ -153,6 +171,52 @@ body {
 	/* z-index: 2; */
 	transform: perspective(600px) rotateY(180deg);
 	background-color: rgb(82, 220, 13);
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: center;
+}
+.front-img {
+	width: 55%;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+
+	z-index: 4;
+	min-width: 10px;
+}
+.front::before {
+	display: inline-block;
+	content: '';
+	width: 0px;
+	height: 0px;
+	padding: 31%;
+
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255, 255, 255, 0.474);
+}
+.front-num {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	font-size: 36px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.494);
 }
 .card--open .back {
 	transform: perspective(600px) rotateY(-180deg);
@@ -332,3 +396,46 @@ body {
 	/* display: flex; */
 }
 /*  */
+/* anim */
+.shake {
+	animation-name: shake;
+	animation-duration: 0.2s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	transform-origin: 50% 100%;
+}
+@keyframes shake {
+	0% {
+		-webkit-transform: translate(2px, 1px) rotate(0deg);
+	}
+	10% {
+		-webkit-transform: translate(-1px, -2px) rotate(-2deg);
+	}
+	20% {
+		-webkit-transform: translate(-3px, 0px) rotate(3deg);
+	}
+	30% {
+		-webkit-transform: translate(0px, 2px) rotate(0deg);
+	}
+	40% {
+		-webkit-transform: translate(1px, -1px) rotate(1deg);
+	}
+	50% {
+		-webkit-transform: translate(-1px, 2px) rotate(-1deg);
+	}
+	60% {
+		-webkit-transform: translate(-3px, 1px) rotate(0deg);
+	}
+	70% {
+		-webkit-transform: translate(2px, 1px) rotate(-2deg);
+	}
+	80% {
+		-webkit-transform: translate(-1px, -1px) rotate(4deg);
+	}
+	90% {
+		-webkit-transform: translate(2px, 2px) rotate(0deg);
+	}
+	100% {
+		-webkit-transform: translate(1px, -2px) rotate(-1deg);
+	}
+}
