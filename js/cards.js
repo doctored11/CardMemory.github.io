@@ -71,6 +71,14 @@ let _hour = 00,
 
 	function addClick(arrayOfCards) {
 		cards = document.querySelectorAll('.card');
+		let restart = document.querySelector('.restart-btn');
+		restart.addEventListener('click', () => {
+			timerPause();
+			let restartText = document.querySelector('.property-content');
+
+			restartText.textContent = 'Давай сначала) 	';
+			document.querySelector('.game-property-block').classList.remove('block-desable');
+		});
 
 		for (let i = 0; i < arrayOfCards.length; ++i) {
 			cards[i].addEventListener('click', () => {
@@ -260,6 +268,7 @@ let _hour = 00,
 		let fieldHeight = 0.65 * screen.height;
 		let card = document.querySelectorAll('.card');
 		let containerB = document.querySelector('.body__container');
+
 		containerB.style.height = `${screen.height}px`;
 
 		//
@@ -293,15 +302,22 @@ let _hour = 00,
 		_height = x * (fieldHeight / fieldWidth) - margin;
 		//
 		let body = document.querySelector('.body-block');
+
 		if (card.length < 14) {
-			body.style.height = `${0.65 * screen.height}px`;
+			// body.style.height = `${0.65 * screen.height}px`;
 		} else if (card.length < 18) {
-			body.style.height = `${0.7 * screen.height}px`;
+			// body.style.height = `${0.7 * screen.height}px`;
 		} else if (card.length < 36) {
-			body.style.height = `${0.8 * screen.height}px`;
+			// body.style.height = `${0.8 * screen.height}px`;
+
 			margin = x * 0.08;
+		} else if (card.length < 40) {
+			// body.style.height = `${0.8 * screen.height}px`;
+			body.style.height = '100%';
+			margin = x * 0.06;
 		} else {
-			body.style.height = `${0.95 * screen.height}px`;
+			// body.style.height = `${0.95 * screen.height}px`;
+			body.style.height = '100%';
 			body.style.justifyContent = 'flex-start';
 			console.log('95%');
 			margin = x * 0.05;

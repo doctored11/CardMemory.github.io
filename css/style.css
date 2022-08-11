@@ -17,13 +17,15 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 100%;
+	height: 80%;
 }
 .body__frame {
-	height: 80%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
+	/* justify-content: flex-end; */
+	justify-content: center;
+	overflow: hidden;
 }
 .body__container {
 }
@@ -33,6 +35,8 @@ body {
 }
 .header {
 	/* margin-bottom: 8%; */
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 .header__container {
 	padding-top: 15px;
@@ -53,6 +57,11 @@ body {
 	/* padding: 100px 50px 0; */
 	padding-top: 1%;
 
+	margin-top: -3%;
+	padding-top: 3%;
+	margin-bottom: -1%;
+	padding-bottom: 1%;
+
 	display: flex;
 	align-items: center;
 
@@ -62,7 +71,7 @@ body {
 	flex-direction: row;
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
+	/* overflow: hidden; */
 	/* align-content: stretch; */
 	align-content: center;
 }
@@ -300,16 +309,30 @@ body {
 	font-style: italic;
 	line-height: 1.2em;
 	text-align: center;
+	max-width: 75%;
 
 	margin-bottom: 15px;
 }
 .form-start {
 	display: flex;
 	flex-direction: column;
+	min-width: 20%;
+}
+.restart-btn {
+	cursor: pointer;
+}
+.just-validate-error-label {
+	padding-top: 3px;
+	color: #fff !important;
+	font-weight: 500;
+	/* margin-bottom: 5px; */
 }
 .form-start > :not(:last-child) {
 	margin-bottom: 15px;
-	height: 55px;
+	/* height: 55px; */
+}
+.form__input-box {
+	position: relative;
 }
 
 .form__input,
@@ -348,7 +371,9 @@ body {
 	transition: transform 0.3s ease;
 }
 .form-control {
-	height: 100%;
+	height: 44px;
+
+	width: 100%;
 }
 .choices[data-type*='select-one'].is-open::after {
 	margin: none;
