@@ -80,6 +80,9 @@
 	.header__container {
 		padding: 0 12%;
 	}
+	.game-property-block {
+		overflow: hidden;
+	}
 }
 @media (max-width: 480px) {
 	.game-field {
@@ -98,5 +101,14 @@
 	}
 	.game-field {
 		align-content: flex-start;
+	}
+}
+
+@media (max-height: 430px) {
+	.property-content {
+		display: none;
+	}
+	.form-start {
+		max-height: 85%;
 	}
 }
