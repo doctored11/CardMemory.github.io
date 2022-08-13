@@ -74,6 +74,8 @@
 	}
 	.game-property-block {
 		max-width: 80%;
+		min-height: 60vh;
+		max-height: 80vh;
 	}
 	.header__container {
 		padding: 0 12%;
@@ -86,6 +88,7 @@
 	}
 	.game-property-block {
 		max-width: 95%;
+		max-height: 95vh;
 	}
 	.header__container {
 		flex-direction: column;
