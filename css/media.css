@@ -93,4 +93,7 @@
 	.header__item-list {
 		margin-bottom: 5px;
 	}
+	.game-field {
+		align-content: flex-start;
+	}
 }

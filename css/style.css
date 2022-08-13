@@ -264,8 +264,8 @@ body {
 
 	min-width: 60%;
 	max-width: 70%;
-	min-height: 35%;
-	max-height: 65%;
+	min-height: 45vh;
+	max-height: 65vh;
 
 	position: absolute;
 	margin: auto;
