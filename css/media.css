@@ -12,6 +12,18 @@
 		box-shadow: 0 0 0px 8px white inset;
 	}
 }
+@media (max-width: 1680px) {
+	.front-num {
+		font-size: 24px;
+	}
+	.form-start {
+		min-width: inherit;
+		width: 65%;
+	}
+	.game-field {
+		transform: translateY(-5%);
+	}
+}
 
 @media (max-width: 1250px) {
 	.front-num {

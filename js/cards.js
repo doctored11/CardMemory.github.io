@@ -185,6 +185,8 @@ let _hour = 00,
 		let formStart = document.querySelector('.form-start');
 		let input = document.querySelector('.form__input');
 
+		input.classList.remove('just-validate-success-field');
+
 		console.log(formStart);
 		formStart.addEventListener('submit', () => {
 			pairModeDetermine();
@@ -247,9 +249,9 @@ let _hour = 00,
 				console.log(cardBtn[i]);
 				console.log(cardBtn[i].dataset.mode);
 				console.log(userPro);
-				if (userPro) {
-					pairModeDetermine();
-				}
+				// if (userPro) {
+				pairModeDetermine();
+				// }
 				timerStop();
 				setTimeout(() => {
 					document.querySelector('.game-property-block').classList.add('block-desable');
@@ -257,8 +259,8 @@ let _hour = 00,
 				if (arrayOfCards.length != 0) {
 					clearAll();
 				}
-				settings.clickCharge = cardBtn[i].dataset.mode;
-				settings.cardsNumber = cardBtn[i].dataset.cards;
+				settings.clickCharge = Number(cardBtn[i].dataset.mode);
+				settings.cardsNumber = Number(cardBtn[i].dataset.cards);
 				console.log(settings);
 				bestR = JSON.parse(
 					localStorage.getItem(`BestResult${settings.cardsNumber}-${settings.clickCharge}`)
@@ -374,6 +376,7 @@ let _hour = 00,
 			card[i].style.marginBottom = `${margin}px`;
 		}
 		console.log(screen.height);
+		console.log(screen.width);
 
 		body.style.minHeight = `${0.6 * screen.height}px`;
 		body.style.maxHeight = `${0.95 * screen.height}px`;
@@ -516,7 +519,7 @@ let _hour = 00,
 	const validation = new JustValidate('#form');
 	window.pairN = pairModeDetermine();
 	let formSelect = document.querySelector('.main__select');
-	formSelect.addEventListener('mouseup', () => {
+	formSelect.addEventListener('mousedown', () => {
 		console.log('EVENT EVENT');
 		pairModeDetermine();
 		window.pairN = pairModeDetermine();
