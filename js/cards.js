@@ -24,11 +24,13 @@ let _hour = 00,
 
 {
 	// main logic
-	getSettings();
+	let userPro;
+	userPro = addProMenu();
+	userPro ? getSettingsPro() : getSettings();
 
 	function createCardsArray() {
 		console.log('221');
-		settings.clickCharge = pairModeDetermine();
+		// settings.clickCharge = pairModeDetermine();
 		if (settings.clickCharge == 0) settings.clickCharge = 2;
 		for (let i = 0; i < settings.cardsNumber; ++i) {
 			arrayOfCards.push({ value: null, _open: false, _success: false, id: i + 1 });
@@ -177,7 +179,7 @@ let _hour = 00,
 		arrayOfSelectCards.length = 0;
 		clickCount = settings.clickCharge;
 	}
-	function getSettings() {
+	function getSettingsPro() {
 		console.log('&&&&');
 
 		let formStart = document.querySelector('.form-start');
@@ -237,6 +239,46 @@ let _hour = 00,
 			createCardsArray();
 		});
 	}
+	function getSettings() {
+		let cardBtn = document.querySelectorAll('.selection-block__btn-start');
+		// let cardProp = cardBtn.getAttribute('tabindex');
+		for (let i = 0; i < cardBtn.length; ++i) {
+			cardBtn[i].addEventListener('click', () => {
+				console.log(cardBtn[i]);
+				console.log(cardBtn[i].dataset.mode);
+				console.log(userPro);
+				if (userPro) {
+					pairModeDetermine();
+				}
+				timerStop();
+				setTimeout(() => {
+					document.querySelector('.game-property-block').classList.add('block-desable');
+				}, 400);
+				if (arrayOfCards.length != 0) {
+					clearAll();
+				}
+				settings.clickCharge = cardBtn[i].dataset.mode;
+				settings.cardsNumber = cardBtn[i].dataset.cards;
+				console.log(settings);
+				bestR = JSON.parse(
+					localStorage.getItem(`BestResult${settings.cardsNumber}-${settings.clickCharge}`)
+				);
+				if (bestR == undefined) {
+					bestR = {
+						hour: 121,
+						min: 121,
+						sec: 121,
+						ms: 121,
+						mod: 121,
+						click: 121,
+					};
+				}
+
+				timerCounter();
+				createCardsArray();
+			});
+		}
+	}
 	function clearAll() {
 		let field = document.getElementById('field');
 		field.innerHTML = '';
@@ -258,6 +300,7 @@ let _hour = 00,
 		restartText.textContent = `Ваш последний результат ${_hour}h:${_min}m:${_sec}s:${_ms}ms\n
 	 	Ваш лучший результат в режиме ${nMod} карт по правилам \"комбинация ${settings.clickCharge}\" =  ${bestR.hour}h:${bestR.min}m:${bestR.sec}s:${bestR.ms}ms `;
 	}
+
 	function calcCardSize() {
 		let field = document.querySelector('.game-field');
 		let header = document.querySelector('.header');
@@ -450,6 +493,20 @@ let _hour = 00,
 		let combination = Number(select.value);
 		settings.clickCharge = combination;
 		return combination;
+	}
+	function addProMenu() {
+		let btnPro = document.querySelector('.btn-pro');
+		btnPro.addEventListener('click', () => {
+			let settings_cardPole = document.querySelector('.selection-block');
+			let settings__cardPro = document.querySelector('.form-start');
+
+			settings_cardPole.classList.add('d-none');
+			settings__cardPro.classList.remove('d-none');
+			btnPro.classList.add('d-none');
+			getSettingsPro();
+			return true;
+		});
+		return false;
 	}
 }
 

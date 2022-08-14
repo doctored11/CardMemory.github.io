@@ -27,7 +27,7 @@
 			<header class="header">
 				<div class="container header__container">
 					<ul class="header__item-list">
-						<li class="header__block user-name">Lodochnik.test</li>
+						<li class="header__block user-name">CardMemory.test</li>
 						<li class="header__block live-time timer">
 							<div class="timer__timer-block">
 								<div class="time timer__time hours">00</div>
@@ -54,7 +54,42 @@
 				<div class="container body-block">
 					<div class="game-property-block">
 						<div class="property-content"></div>
-						<form action="#" id="form" autocomplete="off" class="form-start">
+
+						<div class="game-selection-block selection-block">
+							<ul class="selection-block__list">
+								<li class="selection-block__item-card">
+									<h2 class="selection-block__heading">8 карт</h2>
+									<p class="selection-block__txt">Режим: пары</p>
+									<button class="selection-block__btn-start" data-cards="8" data-mode="2">
+										Start
+									</button>
+								</li>
+								<li class="selection-block__item-card">
+									<h2 class="selection-block__heading">16 карт</h2>
+									<p class="selection-block__txt">Режим: пары</p>
+									<button class="selection-block__btn-start" data-cards="16" data-mode="2">
+										Start
+									</button>
+								</li>
+								<li class="selection-block__item-card">
+									<h2 class="selection-block__heading">24 карт</h2>
+									<p class="selection-block__txt">Режим: пары</p>
+									<button class="selection-block__btn-start" data-cards="24" data-mode="2">
+										Start
+									</button>
+								</li>
+								<li class="selection-block__item-card">
+									<h2 class="selection-block__heading">15 карт</h2>
+									<p class="selection-block__txt">Режим: тройки</p>
+									<button class="selection-block__btn-start" data-cards="15" data-mode="3">
+										Start
+									</button>
+								</li>
+							</ul>
+						</div>
+						<button class="btn-pro">я PRO!</button>
+
+						<form action="#" id="form" autocomplete="off" class="form-start d-none">
 							<div class="form__input-box">
 								<input
 									type="text"

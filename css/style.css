@@ -7,6 +7,9 @@
 	/* border: 2px solid rgba(240, 180, 29, 0.547); */
 	font-family: 'Nunito', sans-serif;
 }
+.d-none {
+	display: none !important;
+}
 body {
 	overflow: hidden;
 	background: #c9d6ffea;
@@ -81,6 +84,47 @@ body {
 .timer {
 	display: flex;
 	width: max-content;
+}
+.game-selection-block {
+	width: 100%;
+	max-height: 35%;
+	display: flex;
+	justify-content: center;
+}
+.selection-block__list {
+	width: 80%;
+	height: max-content;
+	display: flex;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 20px;
+	justify-content: space-evenly;
+	align-items: center;
+	align-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+.selection-block__item-card {
+	padding: 7% 5%;
+	background-color: #fff;
+	border-radius: 15px;
+
+	width: 40%;
+}
+.selection-block__item-card:not(:nth-last-child(-n + 2)) {
+	margin-bottom: 5%;
+}
+
+.selection-block__heading {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 5px;
+}
+.selection-block__txt {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 10px;
+	height: 37px;
 }
 .timer__timer-block {
 	display: flex;
@@ -266,6 +310,7 @@ body {
 	max-width: 70%;
 	min-height: 45vh;
 	max-height: 65vh;
+	height: max-content;
 
 	position: absolute;
 	margin: auto;
