@@ -108,6 +108,9 @@
 	.game-property-block {
 		overflow: hidden;
 	}
+	.selection-block__list{
+		width: 100%;
+	}
 }
 @media (max-width: 480px) {
 	.game-field {
