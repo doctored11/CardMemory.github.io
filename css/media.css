@@ -20,8 +20,15 @@
 		min-width: inherit;
 		width: 65%;
 	}
-	.game-field {
+	/* .game-field {
 		transform: translateY(-5%);
+	} */
+	.body__frame {
+		display: flex;
+		justify-content: flex-start;
+	}
+	body {
+		overflow: visible;
 	}
 }
 
@@ -32,6 +39,12 @@
 	.form-start {
 		min-width: inherit;
 		width: 65%;
+	}
+	.selection-block__item-card {
+		width: 40%;
+	}
+	.selection-block__item-card:not(:nth-last-child(-n + 2)) {
+		margin-bottom: 5%;
 	}
 }
 @media (max-width: 1000px) {
@@ -113,6 +126,9 @@
 	}
 	.game-field {
 		align-content: flex-start;
+	}
+	body {
+		overflow: hidden;
 	}
 }
 
